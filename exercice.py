@@ -7,8 +7,16 @@ def get_bill(name, data):
 	INDEX_NAME = 0
 	INDEX_QUANTITY = 1
 	INDEX_PRICE = 2
-
-	return ""
+	sous_total = 0
+	for items in data:
+		sous_total += items[INDEX_PRICE] * items[INDEX_QUANTITY]
+	taxes = sous_total * 15/100
+	total = sous_total + taxes
+	return """
+	%s
+	SOUS TOTAL %.2f $
+	TAXES %.2f $
+	TOTAL %.2f $""" %(name,sous_total,taxes,total)
 
 
 def format_number(number, num_decimal_digits):
